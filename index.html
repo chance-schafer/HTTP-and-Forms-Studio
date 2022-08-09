@@ -9,9 +9,7 @@
       let form = document.getElementById("searchForm");
       let searchEngineSelected = document.querySelector(
         "input[name=engine]:checked"
-      ).value;
-
-      let radioSelections = document.querySelector("input[type=radio]:checked");
+      );
 
       let actions = {
         google: "https://www.google.com/search",
@@ -20,8 +18,7 @@
         ask: "https://www.ask.com/web",
       };
 
-      let searchAction = actions[searchEngineSelected];
-      form.setAttribute("action", searchAction);
+      let searchAction = actions[searchEngineSelected.value];
 
       const inputText = document.querySelector("input[name=q]").value;
 
@@ -29,6 +26,8 @@
         alert("Search term required");
         event.preventDefault();
       }
+
+      form.setAttribute("action", searchAction);
     }
 
     window.addEventListener("load", function () {
@@ -36,9 +35,11 @@
       button.addEventListener("click", setSearchEngine);
     });
   </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <h1>Pick Your Search Engine:</h1>
   <form id="searchForm" method="get">
     <!-- TODO: add form elements -->
     <input type="text" name="q" />
@@ -48,6 +49,7 @@
         type="radio"
         name="engine"
         value="google"
+        required
       />Google</label
     >
     <label
