@@ -1,19 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <head>
-	<meta charset="utf-8">
-	<script>
-		// TODO: create a handler
-    window.addEventListener("load", function(){
-        // TODO: register the handler
+  <meta charset="utf-8" />
+  <script>
+    // TODO: create a handler
+
+    function setSearchEngine() {
+      let form = document.getElementById("searchForm");
+      let searchEngineSelected = document.querySelector(
+        "input[name=engine]:checked"
+      ).value;
+
+      let radioSelections = document.querySelector("input[type=radio]:checked");
+
+      let actions = {
+        google: "https://www.google.com/search",
+        duckDuckGo: "https://duckduckgo.com/",
+        bing: "https://www.bing.com/search",
+        ask: "https://www.ask.com/web",
+      };
+
+      let searchAction = actions[searchEngineSelected];
+      form.setAttribute("action", searchAction);
+
+      const inputText = document.querySelector("input[name=q]").value;
+
+      if (inputText === "") {
+        alert("Search term required");
+        event.preventDefault();
+      }
+    }
+
+    window.addEventListener("load", function () {
+      let button = document.getElementById("go");
+      button.addEventListener("click", setSearchEngine);
     });
-	</script>
+  </script>
 </head>
 
 <body>
-
-	<form id="searchForm">
+  <form id="searchForm" method="get">
     <!-- TODO: add form elements -->
-	</form>
-
+    <input type="text" name="q" />
+    <label
+      ><input
+        id="googleOption"
+        type="radio"
+        name="engine"
+        value="google"
+      />Google</label
+    >
+    <label
+      ><input
+        id="duckDuckGoOption"
+        type="radio"
+        name="engine"
+        value="duckDuckGo"
+      />DuckDuckGo</label
+    >
+    <label
+      ><input
+        id="bingOption"
+        type="radio"
+        name="engine"
+        value="bing"
+      />Bing</label
+    >
+    <label
+      ><input id="askOption" type="radio" name="engine" value="ask" />Ask</label
+    >
+    <button id="go" type="submit" value="Go!">Go!</button>
+  </form>
 </body>
